@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sant Jordi</title>
+
+  <style>
+    body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black; /* Fondo negro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: sans-serif;
+    position: relative;
+}
+
+.mensaje-inicial {
+    color: white; /* Texto blanco para fondo negro */
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.circulo-contenedor {
+    z-index: 2;
+    cursor: pointer;
+    display: flex; /* Centrar el círculo dentro del contenedor */
+    justify-content: center;
+    align-items: center;
+}
+
+.circulo {
+    width: 100px; /* Círculo más grande */
+    height: 100px; /* Círculo más grande */
+    background-color: #e44d26; /* Color rojo */
+    border-radius: 50%;
+    opacity: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.2); /* Sombra blanca */
+}
+
+.dragon-contenedor {
+    position: absolute;
+    top: 50%;
+    left: -300px;
+    transform: translateY(-50%);
+    width: 300px; /* Mantenemos el tamaño del contenedor del dragón */
+    z-index: 3;
+    opacity: 0;
+}
+
+.dragon {
+    width: 100%;
+    height: auto;
+}
+
+.mensaje-final {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #e44d26;
+    font-size: 2em;
+    font-weight: bold;
+    opacity: 0;
+    z-index: 4;
+}
+  </style>
+
+  
+</head>
+<body>
+  <div class="portada">
+    <h1 class="mensaje-inicial">Hola Paula!</h1>
+    <p class="mensaje-inicial">Pulsa el círculo para la sorpresa mágica:</p>
+    <div class="circulo-contenedor">
+        <div class="circulo" id="circulo"></div>
+    </div>
+</div>
+
+<div class="dragon-contenedor" id="dragonContenedor">
+    <img src="https://imagizer.imageshack.com/img923/8832/zto1kM.jpg" alt="Dragón con rosa" class="dragon" id="dragon">
+</div>
+
+<div class="mensaje-final" id="mensajeFinal">Feliz Sant Jordi, amor mio ❤️</div>
+
+  <script>
+    const circulo = document.getElementById('circulo');
+const dragonContenedor = document.getElementById('dragonContenedor');
+const mensajeFinal = document.getElementById('mensajeFinal');
+const portada = document.querySelector('.portada');
+
+circulo.addEventListener('click', () => {
+    // Ocultar la portada y el círculo inicial
+    portada.style.opacity = 0;
+    circulo.style.opacity = 0;
+    setTimeout(() => {
+        portada.style.display = 'none';
+        circulo.style.display = 'none';
+
+        // Hacer visible el dragón y animarlo
+        dragonContenedor.style.opacity = 1;
+        dragonContenedor.style.transition = 'left 2s ease-out, opacity 2s ease-out';
+        dragonContenedor.style.left = '50%';
+        setTimeout(() => {
+            dragonContenedor.style.transform = 'translate(-50%, -50%)'; // Asegurar centrado final
+
+            // Mostrar el mensaje final
+            mensajeFinal.style.opacity = 1;
+            mensajeFinal.style.transition = 'opacity 1s ease-in 1s'; // Retardo para que aparezca después del dragón
+        }, 2000); // Después de que el dragón vuele
+    }, 500); // Tiempo para que se desvanezcan la portada y el círculo
+});
+  </script>
+</body>
+</html>
